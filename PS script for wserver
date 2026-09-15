@@ -1,0 +1,21 @@
+Import-Module ActiveDirectory
+#Get-ADOrganizationalUnit -Filter # | Select-Object Name, DistinguishedName
+#Remove-ADOrganizationalUnit -Identity "OU=Finance, DC=prototype, DC=com" -Recursive -Confirm:$false
+#Set-ADObject -Identity "OU=Accounting, OU=Domain Controllers, DC=prototype, DC=com" -ProtectedFromAccidentalDeletion $false
+
+#creating Organization Unit ----------------------------
+#New-ADOrganizationalUnit -Name "OU NAME" -Path "OU=Domain Controllers, DC=DOMAIN NAME, DC=Domain extention ex(com,ph,gov,org" - sample
+#New-ADOrganizationalUnit -Name "Accounting" -Path "OU=Domain Controllers, DC=prototype, DC=com" - sample----------------
+New-ADOrganizationalUnit -Name "" -Path "OU=Domain Controllers, DC=, DC=" #clean template ----------------------
+#Get-ADOrganizationalUnit -Filter # | Select-Object Name, DistinguishedName # show list of OU ------------------
+
+#creating user
+#Remove-ADUser -Identity "CN=Josh, OU=Finance, OU=Domain Controllers, DC=prototype, DC=com" -Confirm: $false <- sample
+Remove-ADUser -Identity "CN=Josh, OU=Finance, OU=Domain Controllers, DC=prototype, DC=com" -Confirm: $false
+
+New-ADUser -Name "Josh" -GivenName "Josh" -Surname "" -SamAccountName "josh"' #use the ` beside the 1key
+-UserPrincipalName "josh@prototype.com" -Path "OU=Finance, OU=Domain Controllers, DC=prototype, DC=com"' 
+-AccountPassword (ConvertTo-SecureString "Welcome2026" -AsPlainText -Force)'
+-Enabled $true
+
+Get-ADUser -Filter * -Server prototype.com | Select-Object Name, SamAccountName, DistinguishedName
