@@ -1,4 +1,12 @@
 Import-Module ActiveDirectory
+
+
+#install ADDS
+Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+
+#configure domain
+Install-ADDSForest -DomainName "prototype. com" -DomainNetbiosName "prototype" -InstallDns: $true
+
 #Get-ADOrganizationalUnit -Filter # | Select-Object Name, DistinguishedName
 #Remove-ADOrganizationalUnit -Identity "OU=Finance, DC=prototype, DC=com" -Recursive -Confirm:$false
 #Set-ADObject -Identity "OU=Accounting, OU=Domain Controllers, DC=prototype, DC=com" -ProtectedFromAccidentalDeletion $false
