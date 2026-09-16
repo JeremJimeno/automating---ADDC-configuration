@@ -1,11 +1,20 @@
+
+#step 1 installing adds
 Import-Module ActiveDirectory
 
-
-#install ADDS
+#install ADDS 
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
 
-#configure domain
+#configure domain <- this requires a restart after installing
 Install-ADDSForest -DomainName "prototype. com" -DomainNetbiosName "prototype" -InstallDns: $true
+
+
+#step 2 installing DHCP server
+#install DHCP server
+Install-WindowsFeature -Name DHCP -IncludeManagementTools
+
+
+
 
 #Get-ADOrganizationalUnit -Filter # | Select-Object Name, DistinguishedName
 #Remove-ADOrganizationalUnit -Identity "OU=Finance, DC=prototype, DC=com" -Recursive -Confirm:$false
